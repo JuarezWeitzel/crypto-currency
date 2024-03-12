@@ -8,6 +8,15 @@ export default createGlobalStyle`
     }
 
     body {
-        background-color: red;
+        background-color: #18171c;
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+
+    button {
+        cursor: pointer;
     }
 `;
