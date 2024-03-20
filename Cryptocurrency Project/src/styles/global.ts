@@ -14,7 +14,6 @@ export default createGlobalStyle`
         margin: 0 auto;
         font-family: sans-serif;
         font-size: 16px;
-        color: #fff;
     }
 
     button {
