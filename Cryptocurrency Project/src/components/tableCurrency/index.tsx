@@ -27,8 +27,6 @@ interface DataProps {
 
 export const TableCurrency = () => {
   const [coins, setCoins] = useState<CoinProps[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const navegate = useNavigate();
 
   useEffect(() => {
     function getData() {
@@ -40,7 +38,7 @@ export const TableCurrency = () => {
           let price = Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-          });          
+          });
 
           const formatResult = coinsData.map((item) => {
             const formated = {
@@ -62,41 +60,40 @@ export const TableCurrency = () => {
 
   return (
     <ResponsiveTable>
-  <StyledTable>
-    <thead>
-      <StyledTr>
-        <StyledTh>Crypto</StyledTh>
-        <StyledTh>Market Value</StyledTh>
-        <StyledTh>Price</StyledTh>
-        <StyledTh>Volume</StyledTh>
-      </StyledTr>
-    </thead>
-    <tbody>
-      {coins.map((coin) => (
-        <StyledTr key={coin.name}>
-          <StyledLabelTd data-label="Crypto">
-            <StyledLink to={`/detail/${coin.symbol}`}>
-              {coin.name} | {coin.symbol}
-            </StyledLink>
-          </StyledLabelTd>
-          <StyledLabelTd data-label="Market Value">
-            {coin.formatedMarket}
-          </StyledLabelTd>
-          <StyledLabelTd data-label="Price">
-            {coin.formatedPrice}
-          </StyledLabelTd>
-          <StyledLabelTd
-            data-label="Volume"
-            profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
-            loss={coin.numberDelta ? coin.numberDelta < 0 : false}
-          >
-            {coin.delta_24h}
-          </StyledLabelTd>
-        </StyledTr>
-      ))}
-    </tbody>
-  </StyledTable>
-</ResponsiveTable>
-
+      <StyledTable>
+        <thead>
+          <StyledTr>
+            <StyledTh>Crypto</StyledTh>
+            <StyledTh>Market Value</StyledTh>
+            <StyledTh>Price</StyledTh>
+            <StyledTh>Volume</StyledTh>
+          </StyledTr>
+        </thead>
+        <tbody>
+          {coins.map((coin) => (
+            <StyledTr key={coin.name}>
+              <StyledLabelTd data-label="Crypto">
+                <StyledLink to={`/detail/${coin.symbol}`}>
+                  {coin.name} | {coin.symbol}
+                </StyledLink>
+              </StyledLabelTd>
+              <StyledLabelTd data-label="Market Value">
+                {coin.formatedMarket}
+              </StyledLabelTd>
+              <StyledLabelTd data-label="Price">
+                {coin.formatedPrice}
+              </StyledLabelTd>
+              <StyledLabelTd
+                data-label="Volume"
+                profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
+                loss={coin.numberDelta ? coin.numberDelta < 0 : false}
+              >
+                {coin.delta_24h}
+              </StyledLabelTd>
+            </StyledTr>
+          ))}
+        </tbody>
+      </StyledTable>
+    </ResponsiveTable>
   );
 };
