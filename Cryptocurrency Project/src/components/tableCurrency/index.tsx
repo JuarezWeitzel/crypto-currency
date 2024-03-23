@@ -21,6 +21,7 @@ interface DataProps {
 
 export const TableCurrency = () => {
   const [coins, setCoins] = useState<CoinProps[]>([]);
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     function getData() {
@@ -46,11 +47,18 @@ export const TableCurrency = () => {
           });
 
           setCoins(formatResult);
-        });
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
     }
 
     getData();
   }, []);
+
+  if(error) {
+    return <S.CatchError> Sorry! Request limit exhausted, try in an hour! </S.CatchError>
+  }
 
   return (
     <S.ResponsiveTable>
