@@ -6,6 +6,13 @@ interface StyledTdProps {
   loss?: boolean;
 }
 
+export const CatchError = styled.div`
+  text-align: center;
+  color: #ff0000;
+  padding: 14px;
+  font-weight: bolder;
+`
+
 export const TableRow = styled.tr`
   background-color: #444444;
 `;
@@ -84,6 +91,7 @@ export const ResponsiveTable = styled.table`
   border-spacing: 0 8px;
 
   @media screen and (max-width: 700px) {
+    padding: 0;
     border: 0;
 
     thead {
