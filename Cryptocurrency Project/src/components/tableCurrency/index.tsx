@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  ResponsiveTable,
-  StyledLabelTd,
-  StyledLink,
-  StyledTable,
-  StyledTh,
-  StyledTr,
-} from "./style";
+
+import * as S from "./style";
 
 interface CoinProps {
   name: string;
@@ -59,41 +53,39 @@ export const TableCurrency = () => {
   }, []);
 
   return (
-    <ResponsiveTable>
-      <StyledTable>
-        <thead>
-          <StyledTr>
-            <StyledTh>Crypto</StyledTh>
-            <StyledTh>Market Value</StyledTh>
-            <StyledTh>Price</StyledTh>
-            <StyledTh>Volume</StyledTh>
-          </StyledTr>
-        </thead>
-        <tbody>
-          {coins.map((coin) => (
-            <StyledTr key={coin.name}>
-              <StyledLabelTd data-label="Crypto">
-                <StyledLink to={`/detail/${coin.symbol}`}>
-                  {coin.name} | {coin.symbol}
-                </StyledLink>
-              </StyledLabelTd>
-              <StyledLabelTd data-label="Market Value">
-                {coin.formatedMarket}
-              </StyledLabelTd>
-              <StyledLabelTd data-label="Price">
-                {coin.formatedPrice}
-              </StyledLabelTd>
-              <StyledLabelTd
-                data-label="Volume"
-                profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
-                loss={coin.numberDelta ? coin.numberDelta < 0 : false}
-              >
-                {coin.delta_24h}
-              </StyledLabelTd>
-            </StyledTr>
-          ))}
-        </tbody>
-      </StyledTable>
-    </ResponsiveTable>
+    <S.ResponsiveTable>
+      <thead>
+        <S.TableRow>
+          <S.TableHeader>Crypto</S.TableHeader>
+          <S.TableHeader>Market Value</S.TableHeader>
+          <S.TableHeader>Price</S.TableHeader>
+          <S.TableHeader>Volume</S.TableHeader>
+        </S.TableRow>
+      </thead>
+      <tbody>
+        {coins.map((coin) => (
+          <S.TableRow key={coin.name}>
+            <S.LabelTableCell data-label="Crypto">
+              <S.Link to={`/detail/${coin.symbol}`}>
+                {coin.name} | {coin.symbol}
+              </S.Link>
+            </S.LabelTableCell>
+            <S.LabelTableCell data-label="Market Value">
+              {coin.formatedMarket}
+            </S.LabelTableCell>
+            <S.LabelTableCell data-label="Price">
+              {coin.formatedPrice}
+            </S.LabelTableCell>
+            <S.LabelTableCell
+              data-label="Volume"
+              profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
+              loss={coin.numberDelta ? coin.numberDelta < 0 : false}
+            >
+              {coin.delta_24h}
+            </S.LabelTableCell>
+          </S.TableRow>
+        ))}
+      </tbody>
+    </S.ResponsiveTable>
   );
 };
