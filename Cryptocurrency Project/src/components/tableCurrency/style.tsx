@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link as StyledLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 interface StyledTdProps {
@@ -6,32 +6,39 @@ interface StyledTdProps {
   loss?: boolean;
 }
 
-export const StyledTable = styled.table`
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 0 8px;
+export const TableRow = styled.tr`
+  background-color: #444444;
 `;
 
-export const StyledTr = styled.tr`
-  background-color: #201e1e;
-`;
-
-export const StyledTh = styled.th`
+export const TableHeader = styled.th`
   font-size: 14px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #FFF;
   padding: 14px;
   text-align: center;
+
+  &:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+
+  &:last-child {
+    border-radius: 0 8px 8px 0;
+  }
 `;
 
-export const StyledLabelTd = styled.td<StyledTdProps>`
-  color: #BBB;
+export const LabelTableCell = styled.td<StyledTdProps>`
+  color: #ffffff;
   padding: 14px;
   text-align: center;
+
+  &:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+
+  &:last-child {
+    border-radius: 0 8px 8px 0;
+  }
 
   ${props =>
     props.profit &&
@@ -45,8 +52,6 @@ export const StyledLabelTd = styled.td<StyledTdProps>`
       color: #f91257;
     `}
 
-
-
   @media screen and (max-width: 600px) {
     &:before {
       content: attr(data-label);
@@ -58,7 +63,7 @@ export const StyledLabelTd = styled.td<StyledTdProps>`
   }
 `;
 
-export const StyledLink = styled(Link)`
+export const Link = styled(StyledLink)`
   text-decoration: none;
   color: #30beff;
   transition: color 0.5s;
@@ -70,7 +75,14 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-export const ResponsiveTable = styled(StyledTable)`
+export const ResponsiveTable = styled.table`
+  margin: 0;
+  padding: 14px;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+
   @media screen and (max-width: 700px) {
     border: 0;
 
@@ -79,19 +91,19 @@ export const ResponsiveTable = styled(StyledTable)`
       position: absolute;
     }
 
-    ${StyledTr} {
+    ${TableRow} {
       border-bottom: 1px solid #ddd;
       display: block;
     }
 
-    ${StyledLabelTd} {
+    ${LabelTableCell} {
       border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       display: block;
       font-size: 14px;
       text-align: right;
     }
 
-    ${StyledLabelTd}::before {
+    ${LabelTableCell}::before {
       content: attr(data-label);
       float: left;
       font-weight: bold;
