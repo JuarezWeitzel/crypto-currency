@@ -54,5 +54,6 @@ export const LoaderText = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
+  font-weight: bolder;
   font-size: 15px;
 `;
