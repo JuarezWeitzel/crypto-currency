@@ -85,6 +85,5 @@ export const Link = styled(StyledLink)`
 
     &:hover {
         background-color: #30beff;
-        color: #FFF;
     }
 `;
