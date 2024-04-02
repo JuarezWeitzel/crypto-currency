@@ -6,7 +6,7 @@ This project was developed as part of the "React Js with TypeScript from Zero to
 
 The project consists of a web application that provides information about cryptocurrencies. The displayed data includes the name of the currency, market value, price, and volume. The application also includes a search field to facilitate the location of specific currencies, as well as detailed pages for each currency with more comprehensive information.
 
-*Note: Some improvements and adjustments were made by me to improve the user experience and further practice the concepts learned. These improvements included the use of Styled-Components, the implementation of Dark/Light theme and a translation system on the website from English to Portuguese (Brazilian Portuguese) and vice versa. Furthermore, I created a loading component and implemented a ContextAPI for it, providing a smoother experience during content loading. These improvements are not present in the course and were implemented by me.*
+*Note: Some improvements and adjustments were made by me to enhance the user experience and further apply the learned concepts. These enhancements included the use of Styled-Components, the implementation of a Dark/Light theme, and a translation system on the website, enabling translation between English and Portuguese (Brazilian Portuguese). Additionally, I created a loading component and implemented a ContextAPI for it, providing a smoother experience during content loading. Moreover, a paging system between the currencies was also implemented. These improvements, which were not covered in the course, were implemented by me.*
 
 ## Technologies Used
 
