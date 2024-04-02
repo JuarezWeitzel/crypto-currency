@@ -82,6 +82,20 @@ export const Link = styled(StyledLink)`
   }
 `;
 
+export const Pages = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+  margin: 10px auto 20px;
+`;
+
+export const ButtonPage = styled.button`
+  background-color: transparent;
+  padding: 5px 10px;
+  color: #FFF;
+`;
+
 export const ResponsiveTable = styled.table`
   margin: 0;
   padding: 14px;
