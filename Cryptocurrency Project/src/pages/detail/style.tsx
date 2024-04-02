@@ -79,12 +79,12 @@ export const Link = styled(StyledLink)`
     color: #FFF;
     text-decoration: none;
     font-size: 20px;
-    background-color: #30beff;
+    background-color: #444444;
     border-radius: 8px;
     transition: 0.4s;
 
     &:hover {
-        background-color: #444444;
-        color: #30beff;
+        background-color: #30beff;
+        color: #FFF;
     }
 `;
