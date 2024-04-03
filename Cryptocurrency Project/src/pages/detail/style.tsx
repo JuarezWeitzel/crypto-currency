@@ -25,6 +25,8 @@ export const DetailDiv = styled.div`
         display: flex;
         width: 100%;
         justify-content: space-between;
+        border-bottom: 2px dashed #444444;
+        margin-bottom: 5px;
     }
 
     span, p {
@@ -35,7 +37,7 @@ export const DetailDiv = styled.div`
     }
 
         @media screen and (max-width: 330px) {
-        font-size: 12px;
+        font-size: 11px;
     }
     }
 `;
