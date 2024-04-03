@@ -8,8 +8,8 @@ interface StyledTdProps {
 
 export const CatchError = styled.div`
   text-align: center;
+  margin-top: 20px;
   color: #ff0000;
-  padding: 14px;
   font-weight: bolder;
 `
 
