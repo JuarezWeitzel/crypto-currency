@@ -35,11 +35,8 @@ export function ThemeContextProvider({
 
   const toggleTheme = () => {
     setTheme(theme.title === "dark" ? light : dark);
+    console.log(theme)
   };
-
-  useEffect(() => {
-    
-  }, [theme]);
 
   return (
     <ThemeProviderContext.Provider value={{ theme, toggleTheme }}>
@@ -50,6 +47,6 @@ export function ThemeContextProvider({
 
 export function useThemeContext() {
   const context = useContext(ThemeProviderContext);
-  if (!context) throw new Error("Error when using useLoading!");
+  if (!context) throw new Error("Error when using useThemeContext!");
   return context;
 }
