@@ -1,13 +1,12 @@
-import { Link } from 'react-router-dom'
-import { HeaderContainer  } from './style'
 import logoimg from '../../assets/logo.svg'
+import * as S from './style'
 
 export const Header = () => {
     return(
-        <HeaderContainer>
-                <Link to="/">
+        <S.HeaderContainer>
+                <S.Link href="/">
                     <img src={logoimg} alt="Logo Crypto"/>
-                </Link>
-        </HeaderContainer>
+                </S.Link>
+        </S.HeaderContainer>
     )
 }
