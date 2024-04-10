@@ -8,7 +8,7 @@ export default createGlobalStyle`
     }
 
     body {
-        background-color: #18171c;
+        background-color: ${props => props.theme.colors.globalBackground};
         width: 100%;
         max-width: 1080px;
         margin: 0 auto;
