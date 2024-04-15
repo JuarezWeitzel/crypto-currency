@@ -29,7 +29,7 @@ export const TableCurrency = () => {
     fetch("https://sujeitoprogramador.com/api-cripto/?key=3f7b6e5897e7211f")
       .then((response) => response.json())
       .then((data: DataProps) => {
-        let coinsData = data.coins.slice(0, 30);
+        let coinsData = data.coins.slice(0, 20);
 
         let price = Intl.NumberFormat("en-US", {
           style: "currency",
@@ -74,7 +74,7 @@ export const TableCurrency = () => {
     }
   }, [error]);
 
-  const itemsPerPage: number = 10;
+  const itemsPerPage: number = 8;
   const totalPages: number = Math.ceil(coins.length / itemsPerPage);
 
   const goToPage = (page: number): void => {
