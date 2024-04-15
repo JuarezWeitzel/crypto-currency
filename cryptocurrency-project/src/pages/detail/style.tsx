@@ -8,16 +8,18 @@ interface StyledProps {
 
 export const Container = styled.div`
     text-align: center;
+    padding: 0 14px;
 `;
 
 export const DetailDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 90%;
+    width: 100%;
+    max-width: 1050px;
     margin: 10px auto 30px;
-    color: #FFF;
-    background-color: #444444;
+    color: ${props => props.theme.colors.textDetailDiv};
+    background-color: ${props => props.theme.colors.backgroundDetailDiv};
     padding: 10px;
     border-radius: 8px;
 
@@ -43,7 +45,7 @@ export const DetailDiv = styled.div`
 `;
 
 export const DetailName = styled.h1`
-    color: #30beff;
+    color: #00aeff;
     margin: 0px auto;
 `;
 
@@ -56,7 +58,7 @@ export const DetailSection = styled.section`
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #30beff;
+    background-color: ${props => props.theme.colors.backgroundDetailSection};
     border-radius: 8px;
 `;
 
@@ -78,10 +80,10 @@ export const Color = styled.span<StyledProps>`
 
 export const Link = styled(StyledLink)`
     padding: 10px 40px;
-    color: #FFF;
+    color: ${props => props.theme.colors.textLink};
     text-decoration: none;
     font-size: 20px;
-    background-color: #444444;
+    background-color: ${props => props.theme.colors.backgroundLink};
     border-radius: 8px;
     transition: 0.4s;
 
