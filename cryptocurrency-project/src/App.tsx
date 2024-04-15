@@ -5,15 +5,22 @@ import { ThemeProvider } from "styled-components"
 import dark from "./styles/themes/dark"
 import { Header } from "./components/header"
 import GlobalStyle from './styles/global.ts';
-import light from "./styles/themes/light"
+import usePersistedState from "./utils/usePersistedState.ts"
+import { DefaultTheme } from "styled-components/dist/types"
+import light from "./styles/themes/light.ts"
 
 function App() {
+  const [theme, setTheme] = usePersistedState<DefaultTheme>("theme", dark);
+
+  const toggleTheme = () => {
+    setTheme(theme.title === 'dark' ? light : dark)
+  }
 
   return (
     <ThemeProvider theme={dark}>
       <LoadingProvider>
         <GlobalStyle/>
-        <Header/>
+        <Header toggleTheme={toggleTheme} />
         <RouterProvider router={router}/>
       </LoadingProvider>
     </ThemeProvider>
