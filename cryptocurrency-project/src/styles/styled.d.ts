@@ -5,6 +5,12 @@ declare module "styled-components" {
     title: string;
 
     colors: {
+      textTableCell: string;
+
+      textTableHeader: string;
+
+      backgroundTable: string;
+
       globalBackground: string;
       text: string;
     };

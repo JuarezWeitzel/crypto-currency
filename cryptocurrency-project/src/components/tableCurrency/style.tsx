@@ -14,14 +14,14 @@ export const CatchError = styled.div`
 `
 
 export const TableRow = styled.tr`
-  background-color: #444444;
+  background-color: ${(props) => props.theme.colors.backgroundTable};
 `;
 
 export const TableHeader = styled.th`
   font-size: 14px;
   letter-spacing: 3px;
+  color: ${(props) => props.theme.colors.textTableHeader};
   text-transform: uppercase;
-  color: #FFF;
   padding: 14px;
   text-align: center;
 
@@ -35,7 +35,7 @@ export const TableHeader = styled.th`
 `;
 
 export const LabelTableCell = styled.td<StyledTdProps>`
-  color: #ffffff;
+  color: ${props => props.theme.colors.textTableCell};
   padding: 14px;
   text-align: center;
 
