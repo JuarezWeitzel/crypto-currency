@@ -16,6 +16,7 @@ The project consists of a web application that provides information about crypto
 - [Coinlib.io](https://coinlib.io/) API (for obtaining cryptocurrency data)
 - [Styled Components](https://styled-components.com/) (for styling)
 - [react-icons](https://react-icons.github.io/react-icons/) (for incorporating icons)
+- [react-switch](https://www.npmjs.com/package/react-switch) (for theme switch button)
 
 ## Features
 
