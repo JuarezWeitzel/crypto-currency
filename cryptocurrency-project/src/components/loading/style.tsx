@@ -1,15 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 100vh;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 `;
 
 export const LoaderContainer = styled.div`
-  position: relative;
   width: 100px;
   height: 100px;
 `;
@@ -54,6 +59,6 @@ export const LoaderText = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
-  font-weight: bolder;
+  font-weight: bold;
   font-size: 15px;
 `;
