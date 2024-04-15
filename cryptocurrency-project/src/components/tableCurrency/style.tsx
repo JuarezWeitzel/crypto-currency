@@ -1,5 +1,5 @@
-import { Link as StyledLink } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import { Link as StyledLink } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 interface StyledTdProps {
   profit?: boolean;
@@ -9,19 +9,24 @@ interface StyledTdProps {
 export const CatchError = styled.div`
   text-align: center;
   margin-top: 20px;
-  color: #ff0000;
+  color: #c40000;
   font-weight: bolder;
-`
+  padding: 0 14px;
+
+  @media screen and (max-width: 300px){
+    font-size: 10px;
+  }
+`;
 
 export const TableRow = styled.tr`
   background-color: ${(props) => props.theme.colors.backgroundTable};
 `;
 
 export const TableHeader = styled.th`
-  font-size: 14px;
+  font-size: 18px;
   letter-spacing: 3px;
-  color: ${(props) => props.theme.colors.textTableHeader};
   text-transform: uppercase;
+  color: ${(props) => props.theme.colors.textTableHeader};
   padding: 14px;
   text-align: center;
 
@@ -35,11 +40,24 @@ export const TableHeader = styled.th`
 `;
 
 export const LabelTableCell = styled.td<StyledTdProps>`
-  color: ${props => props.theme.colors.textTableCell};
+  color: ${(props) => props.theme.colors.textTableCell};
   padding: 14px;
   text-align: center;
+  font-weight: 600;
 
-  &:first-child {
+  ${(props) =>
+    props.profit &&
+    css`
+      color: #12f98a;
+    `}
+
+  ${(props) =>
+    props.loss &&
+    css`
+      color: #f91257;
+    `}
+
+    &:first-child {
     border-radius: 8px 0 0 8px;
   }
 
@@ -47,24 +65,12 @@ export const LabelTableCell = styled.td<StyledTdProps>`
     border-radius: 0 8px 8px 0;
   }
 
-  ${props =>
-    props.profit &&
-    css`
-      color: #12f98a;
-    `}
-
-  ${props =>
-    props.loss &&
-    css`
-      color: #f91257;
-    `}
-
   @media screen and (max-width: 600px) {
     &:before {
       content: attr(data-label);
       float: left;
       font-weight: bold;
-      color: #FFF;
+      color: #ffffff;
       text-transform: uppercase;
     }
   }
@@ -72,13 +78,17 @@ export const LabelTableCell = styled.td<StyledTdProps>`
 
 export const Link = styled(StyledLink)`
   text-decoration: none;
-  color: #30beff;
+  color: ${(props) => props.theme.colors.textLinkTable};
   transition: color 0.5s;
   font-weight: bold;
   font-size: 16px;
 
   &:hover {
-    color: #ffffff;
+    color: ${(props) => props.theme.colors.textLinkTableHover};
+  }
+
+  @media screen and (max-width: 300px){
+    font-size: 12px;
   }
 `;
 
@@ -92,8 +102,11 @@ export const Pages = styled.div`
 
 export const ButtonPage = styled.button`
   background-color: transparent;
+  border-radius: 8px;
+  border: none;
   padding: 5px 10px;
-  color: #FFF;
+  font-weight: 900;
+  color: ${(props) => props.theme.colors.textButtonPage};
 `;
 
 export const ResponsiveTable = styled.table`
@@ -103,34 +116,38 @@ export const ResponsiveTable = styled.table`
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0 8px;
+  overflow-x: auto;
 
   @media screen and (max-width: 700px) {
-    padding: 0;
-    border: 0;
-
     thead {
-      clip: rect(0 0 0 0);
-      position: absolute;
+      display: none;
     }
 
     ${TableRow} {
-      border-bottom: 1px solid #ddd;
       display: block;
+      border-radius: 8px;
+      margin-bottom: 3px;
     }
 
     ${LabelTableCell} {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
       font-size: 14px;
-      text-align: right;
+      text-align: left;
     }
 
     ${LabelTableCell}::before {
       content: attr(data-label);
-      float: left;
       font-weight: bold;
-      color: #FFF;
+      color: ${(props) => props.theme.colors.textTableCell};
       text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 300px) {
+      ${LabelTableCell} {
+        font-size: 10px;
+      }
     }
   }
 `;
