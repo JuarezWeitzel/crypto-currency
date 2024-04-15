@@ -17,7 +17,7 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={theme}>
       <LoadingProvider>
         <GlobalStyle/>
         <Header toggleTheme={toggleTheme} />
