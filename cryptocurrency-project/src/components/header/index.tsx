@@ -20,7 +20,6 @@ export const Header: React.FC<Props> = ({ toggleTheme }) => {
         <img src={logoimg} alt="Logo Crypto" />
       </S.Link>
 
-
       <Switch
             onChange={toggleTheme}
             checked={title === "light"}
