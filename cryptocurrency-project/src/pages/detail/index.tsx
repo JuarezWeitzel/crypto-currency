@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "../../context/loading/loadingContext";
 import * as S from "./style";
 
-interface CoinProp {
+interface CoinProps {
   symbol: string;
   name: string;
   price: string;
@@ -20,47 +20,52 @@ interface CoinProp {
   numberDelta?: number;
 }
 
+interface DataProps {
+  coins: CoinProps[];
+}
+
 export const Detail = () => {
-  const { cripto } = useParams();
-  const [detail, setDetail] = useState<CoinProp>();
+  const { symbol } = useParams<{ symbol: string }>();
+  const [detail, setDetail] = useState<CoinProps>();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getData = () => {
-      setLoading(true);
-      fetch(
-        `https://sujeitoprogramador.com/api-cripto/coin/?key=3f7b6e5897e7211f&symbol=${cripto}`
-      )
-        .then((response) => response.json())
-        .then((data: CoinProp) => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/src/db.json");
+        const data: DataProps = await response.json();
+        const coin = data.coins.find((coin) => coin.symbol === symbol);
+
+        if (coin) {
           let price = Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
           });
 
           const resultData = {
-            ...data,
-            formatedPrice: price.format(Number(data.price)),
-            formatedMarketCap: price.format(Number(data.market_cap)),
-            formatedLowPrice: price.format(Number(data.low_24h)),
-            formatedHighPrice: price.format(Number(data.high_24h)),
-            numberDelta: parseFloat(data.delta_24h.replace(",", ".")),
+            ...coin,
+            formatedPrice: price.format(Number(coin.price)),
+            formatedMarketCap: price.format(Number(coin.market_cap)),
+            formatedLowPrice: price.format(Number(coin.low_24h)),
+            formatedHighPrice: price.format(Number(coin.high_24h)),
+            numberDelta: parseFloat(coin.delta_24h.replace(",", ".")),
           };
 
           setDetail(resultData);
-        })
-        .catch((error) => {
-          console.log(error);
+        } else {
           navigate("*");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        }
+      } catch (error) {
+        console.error("Error fetching coin details:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getData();
-  }, [cripto]);
+  }, [symbol]);
 
   return (
     <S.Container>

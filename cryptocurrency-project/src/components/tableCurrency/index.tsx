@@ -26,10 +26,10 @@ export const TableCurrency = () => {
 
   const getData = () => {
     setLoading(true);
-    fetch("https://sujeitoprogramador.com/api-cripto/?key=3f7b6e5897e7211f")
+    fetch("/src/db.json")
       .then((response) => response.json())
       .then((data: DataProps) => {
-        let coinsData = data.coins.slice(0, 20);
+        let coinsData = data.coins;
 
         let price = Intl.NumberFormat("en-US", {
           style: "currency",
@@ -37,15 +37,17 @@ export const TableCurrency = () => {
         });
 
         const formatResult = coinsData.map((item: any) => {
+          const delta_24h = typeof item.delta_24h === 'string' ? item.delta_24h : '0';
           const formated = {
             ...item,
             formatedPrice: price.format(Number(item.price)),
             formatedMarket: price.format(Number(item.market_cap)),
-            numberDelta: parseFloat(item.delta_24h.replace(",", ".")),
+            numberDelta: parseFloat(delta_24h.replace(",", ".")),
           };
-
+        
           return formated;
         });
+        
 
         setCoins(formatResult);
         localStorage.setItem("cachedCoins", JSON.stringify(formatResult));
@@ -74,7 +76,7 @@ export const TableCurrency = () => {
     }
   }, [error]);
 
-  const itemsPerPage: number = 8;
+  const itemsPerPage: number = 10;
   const totalPages: number = Math.ceil(coins.length / itemsPerPage);
 
   const goToPage = (page: number): void => {
