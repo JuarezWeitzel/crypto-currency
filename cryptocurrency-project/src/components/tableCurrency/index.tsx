@@ -85,7 +85,7 @@ export const TableCurrency = () => {
     <>
       {error && (
         <S.CatchError>
-          Sorry! Request limit exhausted, try in an hour! In the meantime, the list will not be updated. <br/> The maximum number of requests per hour is 60.
+          API rate limit reached. Limit will reset at the beginning of the next hour."
         </S.CatchError>
       )}
       <S.ResponsiveTable>
