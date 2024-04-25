@@ -13,7 +13,7 @@ export const CatchError = styled.div`
   font-weight: bolder;
   padding: 0 14px;
 
-  @media screen and (max-width: 300px){
+  @media screen and (max-width: 300px) {
     font-size: 10px;
   }
 `;
@@ -48,13 +48,13 @@ export const LabelTableCell = styled.td<StyledTdProps>`
   ${(props) =>
     props.profit &&
     css`
-      color: #12f98a;
+      color: #04941c;
     `}
 
   ${(props) =>
     props.loss &&
     css`
-      color: #f91257;
+      color: #ff0044;
     `}
 
     &:first-child {
@@ -87,7 +87,7 @@ export const Link = styled(StyledLink)`
     color: ${(props) => props.theme.colors.textLinkTableHover};
   }
 
-  @media screen and (max-width: 300px){
+  @media screen and (max-width: 300px) {
     font-size: 12px;
   }
 `;
@@ -97,7 +97,13 @@ export const Pages = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 5px;
-  margin: 10px auto 20px;
+
+  @media screen and (max-width: 400px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+    grid-gap: 5px;
+    margin: auto 14px auto;
+  }
 `;
 
 export const ButtonPage = styled.button`
@@ -107,6 +113,10 @@ export const ButtonPage = styled.button`
   padding: 5px 10px;
   font-weight: 900;
   color: ${(props) => props.theme.colors.textButtonPage};
+
+  &:hover {
+    color: ${props => props.theme.colors.textLinkTableHover};
+  }
 `;
 
 export const ResponsiveTable = styled.table`
