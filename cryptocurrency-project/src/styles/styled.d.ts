@@ -1,4 +1,3 @@
-
 import "styled-components";
 
 declare module "styled-components" {
@@ -23,9 +22,12 @@ declare module "styled-components" {
       textDetailDiv: string;
       backgroundDetailDiv: string;
 
-      backgroundSearch: string;
+      borderHeaderAndFooter: string;
 
       backgroundTable: string;
+
+      backgroundHeaderAndFooter: string;
+      textColorHeaderAndFooter: string;
 
       background: string;
       text: string;

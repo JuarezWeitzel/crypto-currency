@@ -19,11 +19,14 @@ export default {
         textDetailDiv: '#000',
         backgroundDetailDiv: '#FFF',
 
-        backgroundSearch: '#000',
+        borderHeaderAndFooter: '#afafaf',
 
-        backgroundTable: '#f1f1f1',
+        backgroundTable: '#d9d9d9',
 
-        background: '#777777',
+        backgroundHeaderAndFooter: '#112233',
+        textColorHeaderAndFooter: '#FFF',
+
+        background: '#FFF',
         text: '#18171c',
         textButtonPage: '#000',
     }

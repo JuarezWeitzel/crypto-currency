@@ -1,4 +1,3 @@
-
 export default {
     title: 'dark',
 
@@ -20,9 +19,12 @@ export default {
         textDetailDiv: '#FFF',
         backgroundDetailDiv: '#444444',
 
-        backgroundSearch: '#FFF',
+        borderHeaderAndFooter: '#FFF',
 
         backgroundTable: '#444444',
+
+        backgroundHeaderAndFooter: '#000',
+        textColorHeaderAndFooter: '#FFF',
 
         background: '#262626',
         text: '#FFF',
