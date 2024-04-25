@@ -17,6 +17,7 @@ export const Header: React.FC<Props> = ({ toggleTheme }) => {
 
   return (
     <HeaderContainer>
+      
       <S.Link href="/">
         <img src={logoimg} alt="Logo Crypto" />
       </S.Link>
@@ -28,8 +29,8 @@ export const Header: React.FC<Props> = ({ toggleTheme }) => {
         checkedIcon={false}
         onColor="#ffffff"
         offColor="#444444"
-        offHandleColor="#000000"
-        onHandleColor="#d9ff00"
+        offHandleColor="#183690"
+        onHandleColor="#fff200"
         handleDiameter={25}
         width={50}
         height={20}
