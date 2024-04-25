@@ -26,10 +26,10 @@ export const TableCurrency = () => {
 
   const getData = () => {
     setLoading(true);
-    fetch("/src/db.json")
+    fetch("https://sujeitoprogramador.com/api-cripto/?key=3f7b6e5897e7211f")
       .then((response) => response.json())
       .then((data: DataProps) => {
-        const coinsData = data.coins.slice(0, 60);
+        const coinsData = data.coins.slice(0, 20);
 
         const price = Intl.NumberFormat("en-US", {
           style: "currency",
