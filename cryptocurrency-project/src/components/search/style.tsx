@@ -6,8 +6,10 @@ export const MainContainer = styled.main`
 
 export const SearchForm = styled.form`
   display: flex;
+  margin: 0 auto;
   gap: 14px;
   width: 100%;
+  max-width: 1080px;
 `;
 
 export const SearchInput = styled.input`
@@ -16,7 +18,7 @@ export const SearchInput = styled.input`
   padding: 0 8px;
   font-size: 15px;
   outline: none;
-  border: none;
+  border: 1px solid #262626;
   border-radius: 8px;
 
   &::-webkit-input-placeholder {
