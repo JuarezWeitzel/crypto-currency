@@ -4,10 +4,16 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${props => props.theme.colors.backgroundHeaderAndFooter};
+  width: 100%;
   height: 120px;
-  max-width: 1080px;
-  padding: 0 14px;
-  margin: 0 auto;
+  padding: 0 24px 0;
+  margin-bottom: 24px;
+  border-bottom: 5px solid ${props => props.theme.colors.borderHeaderAndFooter};
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+
+  
 
   @media screen and (max-width: 350px) {
     img {
@@ -29,9 +35,15 @@ export const Link = styled.a`
     }
   }
 
+  @media screen and (max-width: 350px) {
+    img {
+      width: 150px;
+    }
+
   @media screen and (max-width: 300px) {
     img {
-      width: 170px;
+      width: 120px;
     }
   }
+}
 `;
