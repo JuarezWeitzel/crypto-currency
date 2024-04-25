@@ -26,17 +26,17 @@ export const TableCurrency = () => {
 
   const getData = () => {
     setLoading(true);
-    fetch("https://sujeitoprogramador.com/api-cripto/?key=3f7b6e5897e7211f")
+    fetch("/src/db.json")
       .then((response) => response.json())
       .then((data: DataProps) => {
-        let coinsData = data.coins.slice(0, 20);
+        const coinsData = data.coins.slice(0, 60);
 
-        let price = Intl.NumberFormat("en-US", {
+        const price = Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
         });
 
-        const formatResult = coinsData.map((item: any) => {
+        const formatResult = coinsData.map((item: CoinProps) => {
           const formated = {
             ...item,
             formatedPrice: price.format(Number(item.price)),
@@ -74,7 +74,7 @@ export const TableCurrency = () => {
     }
   }, [error]);
 
-  const itemsPerPage: number = 8;
+  const itemsPerPage: number = 10;
   const totalPages: number = Math.ceil(coins.length / itemsPerPage);
 
   const goToPage = (page: number): void => {
@@ -83,73 +83,80 @@ export const TableCurrency = () => {
 
   return (
     <>
-      {error && (
-        <S.CatchError>
-          API rate limit reached. Limit will reset at the beginning of the next hour."
-        </S.CatchError>
-      )}
-      <S.ResponsiveTable>
-        <thead>
-          <S.TableRow>
-            <S.TableHeader>Crypto</S.TableHeader>
-            <S.TableHeader>Market Value</S.TableHeader>
-            <S.TableHeader>Price</S.TableHeader>
-            <S.TableHeader>Volume</S.TableHeader>
-          </S.TableRow>
-        </thead>
-        <tbody>
-          {coins.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-            .map((coin) => (
-              <S.TableRow key={coin.name}>
-                <S.LabelTableCell data-label="Crypto">
-                  <S.Link to={`/detail/${coin.symbol}`}>
-                    {coin.name} | {coin.symbol}
-                  </S.Link>
-                </S.LabelTableCell>
-                <S.LabelTableCell data-label="Market Value">
-                  {coin.formatedMarket}
-                </S.LabelTableCell>
-                <S.LabelTableCell data-label="Price">
-                  {coin.formatedPrice}
-                </S.LabelTableCell>
-                <S.LabelTableCell
-                  data-label="Volume"
-                  profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
-                  loss={coin.numberDelta ? coin.numberDelta < 0 : false}
-                >
-                  {coin.delta_24h}
-                </S.LabelTableCell>
-              </S.TableRow>
+        {error && (
+          <S.CatchError>
+            API rate limit reached. Limit will reset at the beginning of the
+            next hour."
+          </S.CatchError>
+        )}
+        <S.ResponsiveTable>
+          <thead>
+            <S.TableRow>
+              <S.TableHeader>Crypto</S.TableHeader>
+              <S.TableHeader>Market Value</S.TableHeader>
+              <S.TableHeader>Price</S.TableHeader>
+              <S.TableHeader>Volume</S.TableHeader>
+            </S.TableRow>
+          </thead>
+          <tbody>
+            {coins
+              .slice(
+                (currentPage - 1) * itemsPerPage,
+                currentPage * itemsPerPage
+              )
+              .map((coin) => (
+                <S.TableRow key={coin.name}>
+                  <S.LabelTableCell data-label="Crypto">
+                    <S.Link to={`/detail/${coin.symbol}`}>
+                      {coin.name} | {coin.symbol}
+                    </S.Link>
+                  </S.LabelTableCell>
+                  <S.LabelTableCell data-label="Market Value">
+                    {coin.formatedMarket}
+                  </S.LabelTableCell>
+                  <S.LabelTableCell data-label="Price">
+                    {coin.formatedPrice}
+                  </S.LabelTableCell>
+                  <S.LabelTableCell
+                    data-label="Volume"
+                    profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
+                    loss={coin.numberDelta ? coin.numberDelta < 0 : false}
+                  >
+                    {coin.delta_24h}
+                  </S.LabelTableCell>
+                </S.TableRow>
+              ))}
+          </tbody>
+        </S.ResponsiveTable>
+        {coins.length > 1 && (
+          <S.Pages>
+            <S.ButtonPage
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              &larr;
+            </S.ButtonPage>
+            {Array.from(Array(totalPages).keys()).map((page, index) => (
+              <S.ButtonPage
+                key={index}
+                onClick={() => goToPage(page + 1)}
+                disabled={currentPage === page + 1}
+                style={{
+                  color: currentPage === page + 1 ? "#FFF" : "",
+                  backgroundColor: currentPage === page + 1 ? "#30beff" : "",
+                }}
+              >
+                {page + 1}
+              </S.ButtonPage>
             ))}
-        </tbody>
-      </S.ResponsiveTable>
-      <S.Pages>
-        <S.ButtonPage
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &larr;
-        </S.ButtonPage>
-        {Array.from(Array(totalPages).keys()).map((page, index) => (
-          <S.ButtonPage
-            key={index}
-            onClick={() => goToPage(page + 1)}
-            disabled={currentPage === page + 1}
-            style={{
-              color: currentPage === page + 1 ? "#FFF" : "",
-              backgroundColor: currentPage === page + 1 ? "#30beff" : "",
-            }}
-          >
-            {page + 1}
-          </S.ButtonPage>
-        ))}
-        <S.ButtonPage
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &rarr;
-        </S.ButtonPage>
-      </S.Pages>
+            <S.ButtonPage
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              &rarr;
+            </S.ButtonPage>
+          </S.Pages>
+        )}
     </>
   );
 };
