@@ -12,7 +12,7 @@ export default {
         textTableHeader: '#000',
 
         textLink: '#000',
-        backgroundLink: '#f9f9f9',
+        backgroundLink: '#a9a9a9',
         
         backgroundDetailSection: '#a9a9a9',
 

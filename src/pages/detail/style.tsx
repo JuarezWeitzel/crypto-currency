@@ -68,13 +68,13 @@ export const Color = styled.span<StyledProps>`
     ${props =>
     props.profit &&
     css`
-      color: #12f98a;
+      color: #04941c;
     `}
 
   ${props =>
     props.loss &&
     css`
-      color: #f91257;
+      color: #ff0044;
     `}
 `;
 
