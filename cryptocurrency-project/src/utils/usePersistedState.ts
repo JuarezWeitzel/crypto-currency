@@ -6,7 +6,6 @@ type Response<T> = [
   Dispatch<SetStateAction<T>>,
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function usePersistedState<T>(key: string, initialValue: any): Response<T> {
   const [state, setState] = useState(() => {
     const storageTheme = localStorage.getItem(key);
