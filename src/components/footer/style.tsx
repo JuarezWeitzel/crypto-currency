@@ -23,7 +23,6 @@ export const Footer = styled.footer`
 
 export const Ancor = styled.a`
   margin: 8px;
-  color: ${(props) => props.theme.colors.text};
 
   @media screen and (max-width: 550px) {
     div {
