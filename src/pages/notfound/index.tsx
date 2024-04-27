@@ -1,10 +1,15 @@
-import * as S from './style';
+import { Footer } from "../../components/footer";
+import notFound from '../../assets/404.png'
+import * as S from "./style";
 
 export const Notfound = () => {
-    return(
-        <S.ContainerError>
-            <S.Message>Error 404! Page does not exist! 🥺</S.Message>
-            <S.Link to="/">Back to Home. Click Here! 🔙</S.Link>
-        </S.ContainerError>
-    )
-}
+  return (
+    <S.Container>
+      <S.ContainerError>
+        <img src={notFound} alt="" />
+        <S.Link to="/">Back to Home. Click Here!</S.Link>
+      </S.ContainerError>
+      <Footer />
+    </S.Container>
+  );
+};
