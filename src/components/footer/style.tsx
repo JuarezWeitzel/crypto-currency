@@ -21,7 +21,7 @@ export const Footer = styled.footer`
   }
 `;
 
-export const Ancor = styled.a`
+export const Anchor = styled.a`
   margin: 8px;
 
   @media screen and (max-width: 550px) {
