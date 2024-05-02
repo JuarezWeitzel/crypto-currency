@@ -1,0 +1,13 @@
+{
+    "translation": {
+        "requestAPIerror": "API rate limit reached. Limit will reset at the beginning of the next hour.",
+        "crypto": "Crypto",
+        "marketValue": "Market Value",
+        "price": "Price",
+        "highPrice": "High Price",
+        "lowPrice": "Low Price",
+        "volume": "Volume",
+        "listCoins": "List Coins",
+        "PlaceholderSearch": "Enter currency symbol: Example BTC"
+    }
+}

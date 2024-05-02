@@ -1,0 +1,13 @@
+{
+    "translation": {
+        "requestAPIerror": "Limite de taxa de API atingido. O limite será redefinido no início da próxima hora.",
+        "crypto": "Moeda",
+        "marketValue": "Valor de Mercado",
+        "price": "Preço",
+        "highPrice": "Preço Alto",
+        "lowPrice": "Preço Baixo",
+        "volume": "Volume",
+        "listCoins": "Lista de Moedas",
+        "PlaceholderSearch": "Insira o símbolo da moeda: Exemplo BTC"
+    }
+}
