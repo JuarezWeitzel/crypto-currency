@@ -4,16 +4,15 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${props => props.theme.colors.backgroundHeaderAndFooter};
+  background-color: ${(props) => props.theme.colors.backgroundHeaderAndFooter};
   width: 100%;
   height: 120px;
   padding: 0 24px 0;
   margin-bottom: 24px;
-  border-bottom: 5px solid ${props => props.theme.colors.borderHeaderAndFooter};
+  border-bottom: 5px solid
+    ${(props) => props.theme.colors.borderHeaderAndFooter};
   border-bottom-left-radius: 20%;
   border-bottom-right-radius: 20%;
-
-  
 
   @media screen and (max-width: 350px) {
     img {
@@ -29,9 +28,9 @@ export const HeaderContainer = styled.header`
 export const Link = styled.a`
   cursor: pointer;
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 515px) {
     img {
-      width: 250px;
+      width: 150px;
     }
   }
 
@@ -39,13 +38,13 @@ export const Link = styled.a`
     img {
       width: 150px;
     }
+  }
 
   @media screen and (max-width: 300px) {
     img {
       width: 120px;
     }
   }
-}
 `;
 
 export const DivOptions = styled.div`
@@ -53,4 +52,9 @@ export const DivOptions = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 20px;
+
+  @media screen and (max-width: 515px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
