@@ -105,19 +105,19 @@ export const TableCurrency = () => {
             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((coin) => (
               <S.TableRow key={coin.name}>
-                <S.LabelTableCell data-label="Crypto">
+                <S.LabelTableCell data-label={t("crypto")}>
                   <S.Link to={`/detail/${coin.symbol}`}>
                     {coin.name} | {coin.symbol}
                   </S.Link>
                 </S.LabelTableCell>
-                <S.LabelTableCell data-label="Market Value">
+                <S.LabelTableCell data-label={t("marketValue")}>
                   {coin.formatedMarket}
                 </S.LabelTableCell>
-                <S.LabelTableCell data-label="Price">
+                <S.LabelTableCell data-label={t("price")}>
                   {coin.formatedPrice}
                 </S.LabelTableCell>
                 <S.LabelTableCell
-                  data-label="Volume"
+                  data-label={t("volume")}
                   profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
                   loss={coin.numberDelta ? coin.numberDelta < 0 : false}
                 >
