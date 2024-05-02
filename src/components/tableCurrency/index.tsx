@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as S from "./style";
 import { useLoading } from "../../context/loading/loadingContext";
+import { useTranslation } from "react-i18next";
 
 interface CoinProps {
   name: string;
@@ -23,6 +24,8 @@ export const TableCurrency = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
   const { setLoading } = useLoading();
+
+  const { t } = useTranslation();
 
   const getData = () => {
     setLoading(true);
@@ -83,80 +86,76 @@ export const TableCurrency = () => {
 
   return (
     <>
-        {error && (
-          <S.CatchError>
-            API rate limit reached. Limit will reset at the beginning of the
-            next hour."
-          </S.CatchError>
-        )}
-        <S.ResponsiveTable>
-          <thead>
-            <S.TableRow>
-              <S.TableHeader>Crypto</S.TableHeader>
-              <S.TableHeader>Market Value</S.TableHeader>
-              <S.TableHeader>Price</S.TableHeader>
-              <S.TableHeader>Volume</S.TableHeader>
-            </S.TableRow>
-          </thead>
-          <tbody>
-            {coins
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                currentPage * itemsPerPage
-              )
-              .map((coin) => (
-                <S.TableRow key={coin.name}>
-                  <S.LabelTableCell data-label="Crypto">
-                    <S.Link to={`/detail/${coin.symbol}`}>
-                      {coin.name} | {coin.symbol}
-                    </S.Link>
-                  </S.LabelTableCell>
-                  <S.LabelTableCell data-label="Market Value">
-                    {coin.formatedMarket}
-                  </S.LabelTableCell>
-                  <S.LabelTableCell data-label="Price">
-                    {coin.formatedPrice}
-                  </S.LabelTableCell>
-                  <S.LabelTableCell
-                    data-label="Volume"
-                    profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
-                    loss={coin.numberDelta ? coin.numberDelta < 0 : false}
-                  >
-                    {coin.delta_24h}
-                  </S.LabelTableCell>
-                </S.TableRow>
-              ))}
-          </tbody>
-        </S.ResponsiveTable>
-        {coins.length > 1 && (
-          <S.Pages>
-            <S.ButtonPage
-              onClick={() => goToPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              &larr;
-            </S.ButtonPage>
-            {Array.from(Array(totalPages).keys()).map((page, index) => (
-              <S.ButtonPage
-                key={index}
-                onClick={() => goToPage(page + 1)}
-                disabled={currentPage === page + 1}
-                style={{
-                  color: currentPage === page + 1 ? "#FFF" : "",
-                  backgroundColor: currentPage === page + 1 ? "#30beff" : "",
-                }}
-              >
-                {page + 1}
-              </S.ButtonPage>
+      {error && (
+        <S.CatchError>
+          {t("requestAPIerror")}
+        </S.CatchError>
+      )}
+      <S.ResponsiveTable>
+        <thead>
+          <S.TableRow>
+            <S.TableHeader>{t("crypto")}</S.TableHeader>
+            <S.TableHeader>{t("marketValue")}</S.TableHeader>
+            <S.TableHeader>{t("price")}</S.TableHeader>
+            <S.TableHeader>{t("volume")}</S.TableHeader>
+          </S.TableRow>
+        </thead>
+        <tbody>
+          {coins
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((coin) => (
+              <S.TableRow key={coin.name}>
+                <S.LabelTableCell data-label="Crypto">
+                  <S.Link to={`/detail/${coin.symbol}`}>
+                    {coin.name} | {coin.symbol}
+                  </S.Link>
+                </S.LabelTableCell>
+                <S.LabelTableCell data-label="Market Value">
+                  {coin.formatedMarket}
+                </S.LabelTableCell>
+                <S.LabelTableCell data-label="Price">
+                  {coin.formatedPrice}
+                </S.LabelTableCell>
+                <S.LabelTableCell
+                  data-label="Volume"
+                  profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
+                  loss={coin.numberDelta ? coin.numberDelta < 0 : false}
+                >
+                  {coin.delta_24h}
+                </S.LabelTableCell>
+              </S.TableRow>
             ))}
+        </tbody>
+      </S.ResponsiveTable>
+      {coins.length > 1 && (
+        <S.Pages>
+          <S.ButtonPage
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            &larr;
+          </S.ButtonPage>
+          {Array.from(Array(totalPages).keys()).map((page, index) => (
             <S.ButtonPage
-              onClick={() => goToPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
+              key={index}
+              onClick={() => goToPage(page + 1)}
+              disabled={currentPage === page + 1}
+              style={{
+                color: currentPage === page + 1 ? "#FFF" : "",
+                backgroundColor: currentPage === page + 1 ? "#30beff" : "",
+              }}
             >
-              &rarr;
+              {page + 1}
             </S.ButtonPage>
-          </S.Pages>
-        )}
+          ))}
+          <S.ButtonPage
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &rarr;
+          </S.ButtonPage>
+        </S.Pages>
+      )}
     </>
   );
 };

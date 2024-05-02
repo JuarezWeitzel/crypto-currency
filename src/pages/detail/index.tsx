@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,  } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "../../context/loading/loadingContext";
 import * as S from "./style";
+import { useTranslation } from "react-i18next";
 
 interface CoinProp {
   symbol: string;
@@ -25,6 +26,8 @@ export const Detail = () => {
   const [detail, setDetail] = useState<CoinProp>();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const getData = () => {
@@ -70,22 +73,22 @@ export const Detail = () => {
 
         <S.DetailSection>
           <p>
-            <strong>Market Cap: </strong>
+            <strong>{t("marketValue")}: </strong>
             <span> {detail?.formatedMarketCap} </span>
           </p>
           <p>
-            <strong>Price: </strong> <span> {detail?.formatedPrice} </span>
+            <strong>{t("price")}: </strong> <span> {detail?.formatedPrice} </span>
           </p>
           <p>
-            <strong>High Price: </strong>
+            <strong>{t("highPrice")}: </strong>
             <span> {detail?.formatedHighPrice} </span>
           </p>
           <p>
-            <strong>Low Price: </strong>
+            <strong>{t("lowPrice")}: </strong>
             <span> {detail?.formatedLowPrice} </span>
           </p>
           <p>
-            <strong>Volume: </strong> 
+            <strong>{t("volume")}: </strong> 
             <S.Color
             profit={detail?.numberDelta ? detail.numberDelta >= 0 : false}
             loss={detail?.numberDelta ? detail.numberDelta < 0 : false}
@@ -97,7 +100,7 @@ export const Detail = () => {
       </S.DetailDiv>
 
       <S.Link to="/">
-        List Coins
+        {t("listCoins")}
       </S.Link>
     </S.Container>
   );
