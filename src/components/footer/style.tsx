@@ -19,6 +19,10 @@ export const Footer = styled.footer`
   @media screen and (max-width: 550px) {
     font-size: 12px;
   }
+
+  span {
+    color: ${(props) => props.theme.colors.textColorHeaderAndFooter};
+  }
 `;
 
 export const Anchor = styled.a`
