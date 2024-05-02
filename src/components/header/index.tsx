@@ -33,9 +33,9 @@ export const Header: React.FC<Props> = ({ toggleTheme }) => {
         offColor="#444444"
         offHandleColor="#183690"
         onHandleColor="#fff200"
-        handleDiameter={25}
-        width={50}
-        height={20}
+        handleDiameter={20}
+        width={40}
+        height={15}
         uncheckedHandleIcon={
           <div
             style={{
