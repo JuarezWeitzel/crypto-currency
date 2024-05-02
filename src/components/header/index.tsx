@@ -6,6 +6,7 @@ import Switch from "react-switch";
 import { CiSun } from "react-icons/ci";
 import { FaMoon } from "react-icons/fa";
 import * as S from "./style";
+import { LanguageSwitch } from "../languageSwitch";
 
 interface Props {
   toggleTheme(): void;
@@ -17,11 +18,12 @@ export const Header: React.FC<Props> = ({ toggleTheme }) => {
 
   return (
     <HeaderContainer>
-      
       <S.Link href="/">
         <img src={logoimg} alt="Logo Crypto" />
       </S.Link>
 
+      <S.DivOptions>
+      <LanguageSwitch />
       <Switch
         onChange={toggleTheme}
         checked={title === "light"}
@@ -60,6 +62,7 @@ export const Header: React.FC<Props> = ({ toggleTheme }) => {
           </div>
         }
       />
+      </S.DivOptions>
     </HeaderContainer>
   );
 };
