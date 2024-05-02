@@ -8,7 +8,17 @@ This project was developed as part of the "React Js with TypeScript from Zero to
 
 The project consists of a web application that provides information about cryptocurrencies. The displayed data includes the name of the currency, market value, price, and volume. The application also includes a search field to facilitate the location of specific currencies, as well as detailed pages for each currency with more comprehensive information.
 
-*Note: Some improvements and adjustments were made by me to enhance the user experience and further apply the learned concepts. These enhancements included the use of Styled-Components, the implementation of a Dark/Light theme, and a translation system on the website, enabling translation between English and Portuguese (Brazilian Portuguese). Additionally, I created a loading component and implemented a ContextAPI for it, providing a smoother experience during content loading. Moreover, a paging system between the currencies was also implemented. These improvements, which were not covered in the course, were implemented by me.*
+### Improvements Implemented by Me
+
+As part of enhancing user experience and delving deeper into learned concepts, I implemented several improvements and adjustments, including:
+
+- Utilization of Styled-Components for more flexible and organized styling.
+- Implementation of a Dark/Light theme system, providing users with the choice of their preferred visual preference.
+- Integration of a translation system on the website, enabling seamless translation between English and Brazilian Portuguese.
+- Development of a custom loading component, along with the implementation of a ContextAPI, to ensure a smoother content loading experience without interruptions.
+- Introduction of a pagination system among currencies, enhancing usability and facilitating navigation through the content.
+
+It's worth noting that these improvements, are not covered in the course, were devised and implemented by me to further optimize the functionality and overall experience of the project.
 
 ## Technologies Used
 
@@ -19,6 +29,7 @@ The project consists of a web application that provides information about crypto
 - [Styled Components](https://styled-components.com/) (for styling)
 - [react-icons](https://react-icons.github.io/react-icons/) (for incorporating icons)
 - [react-switch](https://www.npmjs.com/package/react-switch) (for theme switch button)
+- [i18n](https://react.i18next.com/) (for translate)
 
 ## Features
 
