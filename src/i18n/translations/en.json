@@ -8,6 +8,7 @@
         "lowPrice": "Low Price",
         "volume": "Volume",
         "listCoins": "List Coins",
-        "PlaceholderSearch": "Enter currency symbol: Example BTC"
+        "placeholderSearch": "Enter currency symbol: Example BTC",
+        "button404": "Back to Home. Click Here!"
     }
 }

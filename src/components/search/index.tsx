@@ -29,7 +29,7 @@ export const Search = () => {
         <SearchInput
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
-          placeholder={t("PlaceholderSearch")}
+          placeholder={t("placeholderSearch")}
           type="text"
         />
         <SearchButton type="submit">

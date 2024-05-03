@@ -8,6 +8,7 @@
         "lowPrice": "Preço Baixo",
         "volume": "Volume",
         "listCoins": "Lista de Moedas",
-        "PlaceholderSearch": "Insira o símbolo da moeda: Exemplo BTC"
+        "placeholderSearch": "Insira o símbolo da moeda: Exemplo BTC",
+        "button404": "Volte para Home. Clique aqui!"
     }
 }
