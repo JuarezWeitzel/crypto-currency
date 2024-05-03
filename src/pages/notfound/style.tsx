@@ -12,13 +12,14 @@ export const ContainerError = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto 10px;
+    gap: 10px;
 
     img {
         max-width: 1080px;
         width: 100%;
         height: 100%;
         border-radius: 20px;
-        padding: 0 10px 24px;
     }
 `;
 
