@@ -37,6 +37,7 @@ export const LanguageSwitch = () => {
                 i18n.language === languageOptions.value
                   ? "2px solid #0999ff"
                   : "none",
+              borderRadius: i18n.language === languageOptions.value ? "50%" : "0" // Adiciona borda redonda
             }}
           />
         </S.ButtonLanguage>
