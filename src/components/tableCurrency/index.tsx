@@ -44,7 +44,7 @@ export const TableCurrency = () => {
             ...item,
             formatedPrice: price.format(Number(item.price)),
             formatedMarket: price.format(Number(item.market_cap)),
-            numberDelta: parseFloat(item.delta_24h.replace(",", ".")),
+            numberDelta: parseFloat(String(item.delta_24h).replace(",", ".")),
           };
 
           return formated;
