@@ -6,9 +6,32 @@ interface StyledProps {
     loss?: boolean;
   }
 
-export const Container = styled.div`
-    text-align: center;
-    padding: 0 14px;
+export const DivButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DivAnnouncement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ImageLogo = styled.img `
+    width: 25px;
+    height: 25px;
+    transition: all 1s;
+
+    &:hover {
+        transform: scale(1.5);
+        z-index: 99;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 15px;
+        height: 15px;
+    }
 `;
 
 export const DetailDiv = styled.div`
@@ -17,7 +40,7 @@ export const DetailDiv = styled.div`
     justify-content: center;
     width: 100%;
     max-width: 1050px;
-    margin: 10px auto 30px;
+    margin: auto;
     color: ${props => props.theme.colors.textDetailDiv};
     background-color: ${props => props.theme.colors.backgroundDetailDiv};
     padding: 10px;
@@ -79,7 +102,9 @@ export const Color = styled.span<StyledProps>`
 `;
 
 export const Link = styled(StyledLink)`
+    margin: 10px auto;
     padding: 10px 40px;
+    text-align: center;
     color: ${props => props.theme.colors.textLink};
     text-decoration: none;
     font-size: 20px;
@@ -89,5 +114,6 @@ export const Link = styled(StyledLink)`
 
     &:hover {
         background-color: #30beff;
+        color: #fff;
     }
 `;

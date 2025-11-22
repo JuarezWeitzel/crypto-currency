@@ -1,57 +1,76 @@
-import { useEffect, useState,  } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "../../context/loading/loadingContext";
 import * as S from "./style";
 import { useTranslation } from "react-i18next";
+import { Footer } from "../../components/footer";
+import { Container } from "../../components/container";
 
-interface CoinProp {
-  symbol: string;
+interface CoinProps {
+  id: string;
   name: string;
-  price: string;
-  market_cap: string;
-  low_24h: string;
-  high_24h: string;
-  total_volume_24h: string;
-  delta_24h: string;
-  formatedPrice: string;
-  formatedMarket: string;
-  formatedLowPrice: string;
-  formatedHighPrice: string;
-  formatedMarketCap: string;
+  symbol: string;
+  priceUsd: string;
+  vwap24Hr: string;
+  changePercent24Hr: string;
+  rank: string;
+  supply: string;
+  maxSupply: string;
+  marketCapUsd: number;
+  volumeUsd24Hr: number;
+  explorer: string;
+  formatedPrice?: string;
+  formatedMarket?: string;
+  formatedVolume?: string;
   numberDelta?: number;
+  delta_24h?: string;
 }
 
 export const Detail = () => {
   const { cripto } = useParams();
-  const [detail, setDetail] = useState<CoinProp>();
+  const [detail, setDetail] = useState<CoinProps | null>(null);
   const { setLoading } = useLoading();
   const navigate = useNavigate();
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = () => {
       setLoading(true);
+
       fetch(
-        `https://sujeitoprogramador.com/api-cripto/coin/?key=3f7b6e5897e7211f&symbol=${cripto}`
+        `https://rest.coincap.io/v3/assets/${cripto}?apiKey=771d5fa261496662fd225f84e0d0f2faae003b10126d95324a714e1549e0bf53`
       )
         .then((response) => response.json())
-        .then((data: CoinProp) => {
-          let price = Intl.NumberFormat("en-US", {
+        .then((data) => {
+          const item = data.data; // objeto único retornado pela API
+
+          if (!item) {
+            navigate("*");
+            return;
+          }
+
+          const price = Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
           });
 
-          const resultData = {
-            ...data,
-            formatedPrice: price.format(Number(data.price)),
-            formatedMarketCap: price.format(Number(data.market_cap)),
-            formatedLowPrice: price.format(Number(data.low_24h)),
-            formatedHighPrice: price.format(Number(data.high_24h)),
-            numberDelta: parseFloat(data.delta_24h.replace(",", ".")),
+          const priceCompact = Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            notation: "compact",
+          });
+
+          const formatted = {
+            ...item,
+            formatedPrice: price.format(Number(item.priceUsd)),
+            formatedMarket: priceCompact.format(Number(item.marketCapUsd)),
+            formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr)),
+            numberDelta: parseFloat(String(item.changePercent24Hr)),
+            delta_24h: `${Number(item.changePercent24Hr).toFixed(2)}%`,
           };
 
-          setDetail(resultData);
+          setDetail(formatted);
         })
         .catch((error) => {
           console.log(error);
@@ -66,42 +85,54 @@ export const Detail = () => {
   }, [cripto]);
 
   return (
-    <S.Container>
+    <Container>
       <S.DetailDiv>
-        <S.DetailName> {detail?.name} </S.DetailName>
+        <S.DetailName> {detail?.id.toUpperCase()} </S.DetailName>
         <S.DetailSymbol> {detail?.symbol} </S.DetailSymbol>
 
         <S.DetailSection>
           <p>
+            <strong>{t("symbol")}: </strong>
+            <span>
+              <S.ImageLogo
+                src={`https://assets.coincap.io/assets/icons/${detail?.symbol.toLowerCase()}@2x.png`}
+                alt={detail?.name}
+              />
+            </span>
+          </p>
+
+          <p>
+            <strong>{t("price")}: </strong>
+            <span> {detail?.formatedPrice} </span>
+          </p>
+
+          <p>
             <strong>{t("marketValue")}: </strong>
-            <span> {detail?.formatedMarketCap} </span>
+            <span> {detail?.formatedMarket} </span>
           </p>
+
           <p>
-            <strong>{t("price")}: </strong> <span> {detail?.formatedPrice} </span>
+            <strong>{t("volume")}: </strong>
+            <span> {detail?.formatedVolume} </span>
           </p>
+
           <p>
-            <strong>{t("highPrice")}: </strong>
-            <span> {detail?.formatedHighPrice} </span>
-          </p>
-          <p>
-            <strong>{t("lowPrice")}: </strong>
-            <span> {detail?.formatedLowPrice} </span>
-          </p>
-          <p>
-            <strong>{t("volume")}: </strong> 
+            <strong>{t("change24h")}: </strong>
             <S.Color
-            profit={detail?.numberDelta ? detail.numberDelta >= 0 : false}
-            loss={detail?.numberDelta ? detail.numberDelta < 0 : false}
-            > 
-            {detail?.delta_24h}
+              profit={detail?.numberDelta ? detail.numberDelta >= 0 : false}
+              loss={detail?.numberDelta ? detail.numberDelta < 0 : false}
+            >
+              {detail?.delta_24h}
             </S.Color>
           </p>
         </S.DetailSection>
+
+        <S.DetailDiv>
+          <S.Link to="/">{t("listCoins")}</S.Link>
+        </S.DetailDiv>
       </S.DetailDiv>
 
-      <S.Link to="/">
-        {t("listCoins")}
-      </S.Link>
-    </S.Container>
+      <Footer />
+    </Container>
   );
 };

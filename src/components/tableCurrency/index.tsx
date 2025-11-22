@@ -4,19 +4,27 @@ import { useLoading } from "../../context/loading/loadingContext";
 import { useTranslation } from "react-i18next";
 
 interface CoinProps {
+  id: string;
   name: string;
-  delta_24h: string;
-  price: string;
   symbol: string;
-  volume_24h: string;
-  market_cap: string;
-  formatedPrice: string;
-  formatedMarket: string;
+  priceUsd: string;
+  vwap24Hr: string;
+  changePercent24Hr: string;
+  rank: string;
+  supply: string;
+  maxSupply: string;
+  marketCapUsd: number;
+  volumeUsd24Hr: number;
+  explorer: string;
+  formatedPrice?: string;
+  formatedMarket?: string;
+  formatedVolume?: string;
   numberDelta?: number;
+  delta_24h: string;
 }
 
 interface DataProps {
-  coins: CoinProps[];
+  data: CoinProps[];
 }
 
 export const TableCurrency = () => {
@@ -29,22 +37,33 @@ export const TableCurrency = () => {
 
   const getData = () => {
     setLoading(true);
-    fetch("https://sujeitoprogramador.com/api-cripto/?key=3f7b6e5897e7211f")
+    fetch(
+      "https://rest.coincap.io/v3/assets?limit=100&offset=0&apiKey=771d5fa261496662fd225f84e0d0f2faae003b10126d95324a714e1549e0bf53"
+    )
       .then((response) => response.json())
       .then((data: DataProps) => {
-        const coinsData = data.coins.slice(0, 20);
+        const coinsData = data.data;
 
         const price = Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
         });
 
+        const priceCompact = Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          notation: "compact",
+        });
+
         const formatResult = coinsData.map((item: CoinProps) => {
           const formated = {
             ...item,
-            formatedPrice: price.format(Number(item.price)),
-            formatedMarket: price.format(Number(item.market_cap)),
-            numberDelta: parseFloat(String(item.delta_24h).replace(",", ".")),
+            formatedPrice: price.format(Number(item.priceUsd)),
+            formatedMarket: priceCompact.format(Number(item.marketCapUsd)),
+            formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr)),
+            numberDelta: parseFloat(
+              String(item.changePercent24Hr).replace(",", ".")
+            ),
           };
 
           return formated;
@@ -77,7 +96,7 @@ export const TableCurrency = () => {
     }
   }, [error]);
 
-  const itemsPerPage: number = 10;
+  const itemsPerPage: number = 7;
   const totalPages: number = Math.ceil(coins.length / itemsPerPage);
 
   const goToPage = (page: number): void => {
@@ -86,27 +105,33 @@ export const TableCurrency = () => {
 
   return (
     <>
-      {error && (
-        <S.CatchError>
-          {t("requestAPIerror")}
-        </S.CatchError>
-      )}
+      {error && <S.CatchError>{t("requestAPIerror")}</S.CatchError>}
       <S.ResponsiveTable>
         <thead>
           <S.TableRow>
+            <S.TableHeader>{t("symbol")}</S.TableHeader>
             <S.TableHeader>{t("crypto")}</S.TableHeader>
             <S.TableHeader>{t("marketValue")}</S.TableHeader>
             <S.TableHeader>{t("price")}</S.TableHeader>
             <S.TableHeader>{t("volume")}</S.TableHeader>
+            <S.TableHeader>{t("change24h")}</S.TableHeader>
           </S.TableRow>
         </thead>
         <tbody>
           {coins
             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((coin) => (
-              <S.TableRow key={coin.name}>
+              <S.TableRow key={coin.id}>
+                <S.LabelTableCell data-label={t("symbol")}>
+                  <S.Link to={`/detail/${coin.id}`}>
+                    <S.ImageLogo
+                      src={`https://assets.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`}
+                      alt={coin.name}
+                    />
+                  </S.Link>
+                </S.LabelTableCell>
                 <S.LabelTableCell data-label={t("crypto")}>
-                  <S.Link to={`/detail/${coin.symbol}`}>
+                  <S.Link to={`/detail/${coin.id}`}>
                     {coin.name} | {coin.symbol}
                   </S.Link>
                 </S.LabelTableCell>
@@ -116,12 +141,15 @@ export const TableCurrency = () => {
                 <S.LabelTableCell data-label={t("price")}>
                   {coin.formatedPrice}
                 </S.LabelTableCell>
+                <S.LabelTableCell data-label={t("volume")}>
+                  {coin.formatedVolume}
+                </S.LabelTableCell>
                 <S.LabelTableCell
-                  data-label={t("volume")}
+                  data-label={t("change24h")}
                   profit={coin.numberDelta ? coin.numberDelta >= 0 : false}
                   loss={coin.numberDelta ? coin.numberDelta < 0 : false}
                 >
-                  {coin.delta_24h}
+                  {coin.numberDelta ? coin.numberDelta.toFixed(2) : ""}
                 </S.LabelTableCell>
               </S.TableRow>
             ))}

@@ -1,9 +1,11 @@
 {
     "translation": {
         "requestAPIerror": "Limite de taxa de API atingido. O limite será redefinido no início da próxima hora.",
+        "symbol": "Simbolo",
         "crypto": "Moeda",
         "marketValue": "Valor de Mercado",
         "price": "Preço",
+        "change24h": "Variação 24h",
         "highPrice": "Preço Alto",
         "lowPrice": "Preço Baixo",
         "volume": "Volume",

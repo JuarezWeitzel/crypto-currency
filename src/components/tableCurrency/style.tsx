@@ -18,6 +18,22 @@ export const CatchError = styled.div`
   }
 `;
 
+export const ImageLogo = styled.img `
+    width: 25px;
+    height: 25px;
+    transition: all 1s;
+
+    &:hover {
+        transform: scale(1.5);
+        z-index: 99;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 15px;
+        height: 15px;
+    }
+`;
+
 export const TableRow = styled.tr`
   background-color: ${(props) => props.theme.colors.backgroundTable};
 `;

@@ -1,9 +1,11 @@
 {
     "translation": {
         "requestAPIerror": "API rate limit reached. Limit will reset at the beginning of the next hour.",
+        "symbol": "Symbol",
         "crypto": "Crypto",
         "marketValue": "Market Value",
         "price": "Price",
+        "change24h": "Change 24H",
         "highPrice": "High Price",
         "lowPrice": "Low Price",
         "volume": "Volume",
