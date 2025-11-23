@@ -18,20 +18,20 @@ export const CatchError = styled.div`
   }
 `;
 
-export const ImageLogo = styled.img `
-    width: 25px;
-    height: 25px;
-    transition: all 1s;
+export const ImageLogo = styled.img`
+  width: 25px;
+  height: 25px;
+  transition: all 1s;
 
-    &:hover {
-        transform: scale(1.5);
-        z-index: 99;
-    }
+  &:hover {
+    transform: scale(1.5);
+    z-index: 99;
+  }
 
-    @media screen and (max-width: 400px) {
-        width: 15px;
-        height: 15px;
-    }
+  @media screen and (max-width: 400px) {
+    width: 15px;
+    height: 15px;
+  }
 `;
 
 export const TableRow = styled.tr`
@@ -108,6 +108,20 @@ export const Link = styled(StyledLink)`
   }
 `;
 
+export const Dot = styled.button<{ active: boolean }>`
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${({ active }) => (active ? "#30beff" : "#ccc")};
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+`;
+
 export const Pages = styled.div`
   display: flex;
   flex-direction: row;
@@ -120,6 +134,12 @@ export const Pages = styled.div`
     grid-gap: 5px;
     margin: auto 14px auto;
   }
+
+  @media (max-width: 500px) {
+    ButtonPage {
+      display: none;
+    }
+  }
 `;
 
 export const ButtonPage = styled.button`
@@ -131,7 +151,11 @@ export const ButtonPage = styled.button`
   color: ${(props) => props.theme.colors.textButtonPage};
 
   &:hover {
-    color: ${props => props.theme.colors.textLinkTableHover};
+    color: ${(props) => props.theme.colors.textLinkTableHover};
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 11px;
   }
 `;
 

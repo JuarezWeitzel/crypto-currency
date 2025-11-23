@@ -31,8 +31,8 @@ export const TableCurrency = () => {
   const [coins, setCoins] = useState<CoinProps[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 500);
   const { setLoading } = useLoading();
-
   const { t } = useTranslation();
 
   const getData = () => {
@@ -74,7 +74,6 @@ export const TableCurrency = () => {
       })
       .catch((error) => {
         setError(error.message);
-        console.log(error);
       })
       .finally(() => {
         setLoading(false);
@@ -96,11 +95,46 @@ export const TableCurrency = () => {
     }
   }, [error]);
 
-  const itemsPerPage: number = 7;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 500);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const itemsPerPage: number = 10;
   const totalPages: number = Math.ceil(coins.length / itemsPerPage);
 
   const goToPage = (page: number): void => {
     setCurrentPage(page);
+  };
+
+  const generatePagination = () => {
+    const pages: (number | string)[] = [];
+
+    if (!isMobile) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+      return pages;
+    }
+
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+      return pages;
+    }
+
+    pages.push(1);
+
+    if (currentPage > 3) pages.push("...");
+    if (currentPage > 2) pages.push(currentPage - 1);
+    if (currentPage !== 1 && currentPage !== totalPages)
+      pages.push(currentPage);
+    if (currentPage < totalPages - 1) pages.push(currentPage + 1);
+    if (currentPage < totalPages - 2) pages.push("...");
+    pages.push(totalPages);
+
+    return pages;
   };
 
   return (
@@ -155,6 +189,7 @@ export const TableCurrency = () => {
             ))}
         </tbody>
       </S.ResponsiveTable>
+
       {coins.length > 1 && (
         <S.Pages>
           <S.ButtonPage
@@ -163,19 +198,22 @@ export const TableCurrency = () => {
           >
             &larr;
           </S.ButtonPage>
-          {Array.from(Array(totalPages).keys()).map((page, index) => (
+
+          {generatePagination().map((page, index) => (
             <S.ButtonPage
               key={index}
-              onClick={() => goToPage(page + 1)}
-              disabled={currentPage === page + 1}
+              onClick={() => typeof page === "number" && goToPage(page)}
+              disabled={page === currentPage || page === "..."}
               style={{
-                color: currentPage === page + 1 ? "#FFF" : "",
-                backgroundColor: currentPage === page + 1 ? "#30beff" : "",
+                color: page === currentPage ? "#FFF" : "",
+                backgroundColor: page === currentPage ? "#30beff" : "",
+                cursor: page === "..." ? "default" : "pointer",
               }}
             >
-              {page + 1}
+              {page}
             </S.ButtonPage>
           ))}
+
           <S.ButtonPage
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
