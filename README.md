@@ -1,5 +1,7 @@
 Link to access: https://crypto-currency-chi.vercel.app
 
+<img src="./src/assets/preview.png">
+
 # Cryptocurrency Project
 
 This project was developed as part of the "React Js with TypeScript from Zero to Advanced in Practice" course and aims to practice routes and HTTP requests, establishing communications with external services and APIs, as well as handling data received from the API. Routing and responsiveness practices were also explored.
