@@ -1,4 +1,4 @@
-<img src="./src/assets/preview.png">
+Link to access: https://crypto-currency-chi.vercel.app
 
 # Cryptocurrency Project
 
